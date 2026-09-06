@@ -16,7 +16,6 @@
   --accent-dim:#1f6f5c;
   --warn:      #e8833a;
   --link:      #7fd1ff;
-  --card-img:  #fbfcfd;
 
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   --sans: ui-sans-serif, -apple-system, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -39,13 +38,18 @@ html[data-theme="light"] {
   --accent-dim:#a8ded0;
   --warn:      #b8531a;
   --link:      #0f6ea8;
-  --card-img:  #ffffff;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* anchors used to land underneath the sticky bar */
+  scroll-padding-top: 74px;
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+section, .hero { scroll-margin-top: 74px; }
 
 body {
   margin: 0;
@@ -56,7 +60,10 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  text-rendering: optimizeLegibility;
 }
+
 
 /* ---------- language switching ---------- */
 html[data-lang="en"] [lang="vi"] { display: none; }
@@ -67,6 +74,12 @@ html[data-lang="vi"] [lang="en"] { display: none; }
 
 a { color: var(--link); text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent); text-underline-offset: 3px; }
 a:hover { text-decoration-color: currentColor; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
 h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
 
@@ -99,15 +112,31 @@ html[data-theme="light"] .ico-sun  { display: none; }
    ========================================================================== */
 .topbar {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, background-color .25s ease;
 }
+/* once the page has moved, the bar earns its edge */
+.topbar.stuck { border-bottom-color: var(--line-soft); }
+
+/* read-progress rail along the bottom of the bar */
+.progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  transform: scaleX(var(--p, 0)); transform-origin: 0 50%;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent) 40%, transparent), var(--accent));
+  will-change: transform;
+}
+
 .topbar-in {
-  max-width: var(--maxw); margin: 0 auto; padding: 10px 24px;
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 14px 24px;
   display: flex; align-items: center; gap: 18px;
+  transition: padding .25s ease;
 }
+.topbar.stuck .topbar-in { padding: 9px 24px; }
 .brand {
   font-family: var(--mono); font-size: 13px; font-weight: 600;
   color: var(--text); text-decoration: none; letter-spacing: -0.01em;
@@ -191,12 +220,35 @@ html[data-theme="light"] .ico-sun  { display: none; }
 html[data-theme="light"] .btn-primary { color: #ffffff; }
 .btn-primary:hover { border-color: var(--accent); }
 
+/* ---------- hero signal ----------
+   Decorative only: it draws itself once, then a single point traces it. */
+.signal { margin-top: 40px; height: 118px; }
+.signal svg { display: block; width: 100%; height: 118px; }
+
+.sig-line {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: sig-draw 2.4s cubic-bezier(.22, .61, .36, 1) .25s forwards;
+}
+.sig-area { opacity: 0; animation: sig-fill 1.6s ease 1.5s forwards; }
+.sig-dot  { opacity: 0; animation: sig-fill 1.2s ease 2.4s forwards; }
+
+@keyframes sig-draw { to { stroke-dashoffset: 0; } }
+@keyframes sig-fill { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sig-line { stroke-dashoffset: 0; animation: none; }
+  .sig-area, .sig-dot { opacity: 1; animation: none; }
+  .sig-dot animateMotion { display: none; }
+}
+@media (max-width: 720px) { .signal { height: 84px; margin-top: 32px; } .signal svg { height: 84px; } }
+
 /* stat strip */
 .stats {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 1px; background: var(--line-soft);
   border: 1px solid var(--line-soft); border-radius: var(--r);
-  margin-top: 46px; overflow: hidden;
+  margin-top: 30px; overflow: hidden;
 }
 .stat { background: var(--bg); padding: 18px 20px; }
 .stat b {
@@ -302,13 +354,26 @@ section { padding: 76px 0; border-top: 1px solid var(--line-soft); }
 .proj-body p { margin: 0 0 12px; color: var(--text-dim); font-size: 15px; max-width: 74ch; }
 .proj-body strong { color: var(--text); }
 
+/* Charts are inline SVG painted from CSS variables, so the frame is a quiet
+   surface rather than the white plate a bitmap needed. */
 .figure {
-  margin: 18px 0 6px; background: var(--card-img);
-  border: 1px solid var(--line); border-radius: 10px;
-  padding: 10px; overflow: hidden;
+  margin: 18px 0 6px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--accent) 4%, transparent) 0%,
+      transparent 55%),
+    var(--bg-sink);
+  border: 1px solid var(--line-soft); border-radius: 12px;
+  padding: 16px 18px 12px; overflow: hidden;
+  position: relative;
 }
-.figure img { display: block; width: 100%; height: auto; border-radius: 4px; }
-.figcap { font-size: 12.5px; color: var(--text-mute); margin: 8px 2px 0; }
+/* hairline of accent along the top edge — the one "instrument panel" cue */
+.figure::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 55%, transparent), transparent);
+}
+.figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.figcap { font-size: 12.5px; color: var(--text-mute); margin: 9px 2px 0; line-height: 1.5; }
 
 .figrow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 760px) { .figrow { grid-template-columns: 1fr; } }
@@ -330,10 +395,6 @@ th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; lette
 td { color: var(--text-dim); }
 tr.hi td { color: var(--text); font-weight: 600; background: color-mix(in srgb, var(--accent) 8%, transparent); }
 td.num, th.num { font-family: var(--mono); text-align: right; }
-
-/* inline SVG chart wrapper */
-.svgfig { margin: 18px 0 6px; }
-.svgfig svg { display: block; width: 100%; height: auto; }
 
 /* ==========================================================================
    Skills
@@ -390,8 +451,13 @@ footer .wrap { display: flex; justify-content: space-between; gap: 14px; flex-wr
 /* ==========================================================================
    Entrance animation
    ========================================================================== */
-.reveal { opacity: 0; transform: translateY(14px); }
-.reveal.in { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
+.reveal { opacity: 0; transform: translateY(18px); will-change: opacity, transform; }
+.reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity .7s cubic-bezier(.22, .61, .36, 1),
+              transform .7s cubic-bezier(.22, .61, .36, 1);
+}
+.reveal.in { will-change: auto; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
   .reveal.in { transition: none; }
