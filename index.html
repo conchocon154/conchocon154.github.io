@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lê Minh Đăng — Data &amp; Business Analyst</title>
+<meta name="description" content="Data and business analyst. SQL, Python and statistics on inventory, margin and retrieval problems — with the tests that say whether the numbers hold.">
+<meta name="author" content="Lê Minh Đăng">
+<meta property="og:title" content="Lê Minh Đăng — Data &amp; Business Analyst">
+<meta property="og:description" content="Five public projects, each with a baseline, a significance test, and at least one result that did not go my way.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://conchocon154.github.io/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0f14'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='monospace' fill='%234dd4ac'>Đ</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ====================== TOP BAR ====================== -->
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">minhdang<span class="dot">.</span>dev</a>
+    <nav class="navlinks">
+      <a href="#work"><span lang="en">Work</span><span lang="vi">Dự án</span></a>
+      <a href="#approach"><span lang="en">Approach</span><span lang="vi">Cách làm</span></a>
+      <a href="#skills"><span lang="en">Skills</span><span lang="vi">Kỹ năng</span></a>
+      <a href="#about"><span lang="en">About</span><span lang="vi">Giới thiệu</span></a>
+      <a href="#contact"><span lang="en">Contact</span><span lang="vi">Liên hệ</span></a>
+    </nav>
+    <div class="toggles">
+      <button class="tg" id="langBtn" type="button" aria-label="Switch language">VI</button>
+      <button class="tg" id="themeBtn" type="button" aria-label="Switch theme">☀</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ====================== HERO ====================== -->
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Ho Chi Minh City, Vietnam · <span lang="en">open to remote roles</span><span lang="vi">sẵn sàng làm remote</span></p>
+    <h1>Lê Minh Đăng</h1>
+    <p class="role">
+      <span lang="en">Data &amp; Business Analyst — SQL, Python, and the tests that keep a number honest</span>
+      <span lang="vi">Data &amp; Business Analyst — SQL, Python, và những kiểm định giữ cho con số trung thực</span>
+    </p>
+
+    <p class="pitch">
+      <span lang="en">Computer Science graduate from Ton Duc Thang University. I work on the unglamorous
+      side of data: FIFO costing, receivables ageing, margin erosion, retrieval quality. Every project
+      below has <strong>a baseline it had to beat, a significance test it had to survive</strong>, and at least one
+      result that did not go the way I wanted — published anyway.</span>
+      <span lang="vi">Tốt nghiệp Khoa học Máy tính, Đại học Tôn Đức Thắng. Tôi làm phần ít hào nhoáng
+      của dữ liệu: giá vốn FIFO, tuổi nợ phải thu, bào mòn biên lợi nhuận, chất lượng truy hồi. Mỗi dự án
+      dưới đây đều có <strong>một mốc so sánh phải vượt qua, một kiểm định thống kê phải đứng vững</strong>,
+      và ít nhất một kết quả không như tôi mong muốn — vẫn công bố.</span>
+    </p>
+
+    <div class="cta">
+      <a class="btn btn-primary" href="#work">
+        <span lang="en">See the work</span><span lang="vi">Xem dự án</span> →
+      </a>
+      <a class="btn" href="https://github.com/conchocon154" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="mailto:dangleminh6677@gmail.com">
+        <span lang="en">Email me</span><span lang="vi">Gửi email</span>
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <b>5</b>
+        <span lang="en">public projects, all with green CI</span>
+        <span lang="vi">dự án công khai, CI đều xanh</span>
+      </div>
+      <div class="stat">
+        <b>668,665</b>
+        <span lang="en">rows analysed in the EV study</span>
+        <span lang="vi">dòng dữ liệu phân tích ở dự án EV</span>
+      </div>
+      <div class="stat">
+        <b>96.9%</b>
+        <span lang="en">Recall@1 on SKUs never seen in training</span>
+        <span lang="vi">Recall@1 trên SKU chưa từng thấy khi huấn luyện</span>
+      </div>
+      <div class="stat">
+        <b>3</b>
+        <span lang="en">negative results published, not buried</span>
+        <span lang="vi">kết quả âm được công bố, không giấu</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== APPROACH ====================== -->
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span lang="en">How I work</span><span lang="vi">Cách tôi làm việc</span></p>
+      <h2><span lang="en">Three rules I don't bend</span><span lang="vi">Ba nguyên tắc tôi không nhân nhượng</span></h2>
+      <p>
+        <span lang="en">Analysis is easy to make look impressive and hard to make trustworthy.
+        These are the habits that decide which one you get.</span>
+        <span lang="vi">Làm phân tích trông ấn tượng thì dễ, làm cho nó đáng tin mới khó.
+        Đây là những thói quen quyết định bạn nhận được cái nào.</span>
+      </p>
+    </div>
+
+    <div class="approach">
+      <div class="appr reveal">
+        <span class="num">01</span>
+        <h3><span lang="en">Always ship a baseline</span><span lang="vi">Luôn dựng mốc so sánh</span></h3>
+        <p>
+          <span lang="en">A fine-tuned transformer sounds better than TF-IDF until you measure both.
+          In my matcher, six lines of scikit-learn reached 95.0% — the model beat it by 1.9 points,
+          and the README says so in exactly those words.</span>
+          <span lang="vi">Một transformer fine-tune nghe hay hơn TF-IDF, cho tới khi bạn đo cả hai.
+          Ở dự án đối sánh của tôi, sáu dòng scikit-learn đạt 95,0% — mô hình chỉ hơn 1,9 điểm,
+          và README ghi đúng như vậy.</span>
+        </p>
+      </div>
+      <div class="appr reveal">
+        <span class="num">02</span>
+        <h3><span lang="en">Test before believing</span><span lang="vi">Kiểm định trước khi tin</span></h3>
+        <p>
+          <span lang="en">McNemar tests, paired bootstraps, likelihood ratio tests. A cross-tab in the EV
+          data showed a 69.3% vs 2.5% gap that looked like a strong interaction. The formal test said
+          p = 0.62 and the effect was not there.</span>
+          <span lang="vi">Kiểm định McNemar, bootstrap theo cặp, kiểm định tỉ số hợp lý. Một bảng chéo trong
+          dữ liệu EV cho khoảng cách 69,3% và 2,5%, trông như một tương tác rất mạnh. Kiểm định chính thức
+          cho p = 0,62 — hiệu ứng đó không tồn tại.</span>
+        </p>
+      </div>
+      <div class="appr reveal">
+        <span class="num">03</span>
+        <h3><span lang="en">Publish what failed</span><span lang="vi">Công bố cả cái thất bại</span></h3>
+        <p>
+          <span lang="en">My hybrid reranker was a good idea that did nothing (p = 1.00). My Kaggle
+          submission ranked 398 of 471. Both are in the repositories, in the results tables,
+          where a reviewer will find them.</span>
+          <span lang="vi">Lớp rerank hybrid của tôi là một ý tưởng hay nhưng vô tác dụng (p = 1,00).
+          Bài Kaggle của tôi xếp hạng 398/471. Cả hai đều nằm trong repo, trong bảng kết quả,
+          nơi người xem chắc chắn sẽ thấy.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== WORK ====================== -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span lang="en">Selected work</span><span lang="vi">Dự án tiêu biểu</span></p>
+      <h2><span lang="en">Four case studies</span><span lang="vi">Bốn nghiên cứu tình huống</span></h2>
+      <p>
+        <span lang="en">Every chart below is generated by the repository it belongs to — no mock-ups.
+        Open a case study to read the method and the caveats.</span>
+        <span lang="vi">Mọi biểu đồ dưới đây đều do chính repo tương ứng sinh ra — không có hình minh họa giả.
+        Mở từng dự án để đọc phương pháp và các giới hạn.</span>
+      </p>
+    </div>
+
+    <!-- ---------- 1. retail-analytics-sql ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">SQL · Business analytics</p>
+          <h3>retail-analytics-sql</h3>
+          <p class="lede">
+            <span lang="en">Eight analytical queries over a simulated Vietnamese hardware shop —
+            300 SKUs, 400 customers, 25 months, 8,500 invoices — answering what an owner actually asks:
+            where is the margin going, which stock is dead money, and who owes us.</span>
+            <span lang="vi">Tám truy vấn phân tích trên dữ liệu mô phỏng một cửa hàng kim khí Việt Nam —
+            300 mã hàng, 400 khách, 25 tháng, 8.500 hóa đơn — trả lời đúng câu hỏi của chủ tiệm:
+            biên lợi nhuận chảy đi đâu, hàng nào là tiền chết, ai đang nợ.</span>
+          </p>
+          <div class="tags">
+            <span class="tag">SQL</span><span class="tag">SQLite</span><span class="tag">Python</span>
+            <span class="tag">pandas</span><span class="tag">FIFO costing</span><span class="tag">20 tests</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/retail-analytics-sql" target="_blank" rel="noopener">Repository ↗</a>
+          <a href="https://github.com/conchocon154/retail-analytics-sql/blob/main/reports/findings.md" target="_blank" rel="noopener">Full report ↗</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>3.1% → 6.8%</b><span lang="en">discount drift nobody noticed</span><span lang="vi">chiết khấu trôi mà không ai nhận ra</span></div>
+        <div><b>14%</b><span lang="en">of SKUs carry 80% of revenue</span><span lang="vi">số mã hàng gánh 80% doanh thu</span></div>
+        <div><b>39%</b><span lang="en">of receivables are over 90 days</span><span lang="vi">công nợ đã quá 90 ngày</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span><span lang="vi">Đọc chi tiết</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">The finding that matters</span><span lang="vi">Phát hiện quan trọng nhất</span></h4>
+          <p>
+            <span lang="en">Discounts given to credit customers drifted from 3.1% to 6.8% over two years.
+            Their gross margin fell from 20.5% to 18.6%. <strong>Revenue never dropped — which is exactly why
+            nobody noticed.</strong> Recovering two points is worth roughly 44 million VND a year.</span>
+            <span lang="vi">Chiết khấu cho khách công nợ trôi từ 3,1% lên 6,8% trong hai năm.
+            Biên lợi nhuận gộp của nhóm này giảm từ 20,5% xuống 18,6%. <strong>Doanh thu không hề giảm — và đó
+            chính là lý do không ai để ý.</strong> Lấy lại hai điểm biên tương đương khoảng 44 triệu đồng mỗi năm.</span>
+          </p>
+
+          <div class="figure">
+            <img src="assets/img/revenue_margin.png" alt="Monthly revenue and gross margin over 25 months" loading="lazy" decoding="async">
+          </div>
+          <p class="figcap">
+            <span lang="en">Revenue holds while margin slides — the pattern that hides an erosion problem.</span>
+            <span lang="vi">Doanh thu giữ nguyên trong khi biên trượt xuống — kiểu biểu đồ che giấu vấn đề bào mòn.</span>
+          </p>
+
+          <div class="figrow">
+            <div>
+              <div class="figure"><img src="assets/img/pareto.png" alt="Cumulative revenue share against cumulative SKU share" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">14% of the range carries 80% of revenue; 27 of those SKUs are below their lead-time demand right now.</span><span lang="vi">14% số mã hàng gánh 80% doanh thu; 27 mã trong đó đang dưới mức nhu cầu thời gian chờ hàng.</span></p>
+            </div>
+            <div>
+              <div class="figure"><img src="assets/img/receivables.png" alt="Receivables ageing buckets" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">21 of 122 credit accounts sit above their limit — limits are not enforced where enforcement is possible.</span><span lang="vi">21 trong 122 tài khoản công nợ vượt hạn mức — hạn mức không được siết ở đúng nơi có thể siết.</span></p>
+            </div>
+          </div>
+
+          <h4><span lang="en">The accounting decisions behind the numbers</span><span lang="vi">Những quyết định kế toán phía sau con số</span></h4>
+          <p>
+            <span lang="en">Most of the work is not SQL syntax — it is deciding what each number is measured against.
+            <strong>Cost is FIFO, not average:</strong> every sold unit is matched to the delivery batch it came from,
+            because averaging would smear a supplier price rise backwards into months that never paid it,
+            and the erosion above would partly vanish into that average.
+            <strong>Revenue is net of both discounts and excludes VAT</strong>, which is collected for the state, not earned.
+            <strong>Receivables apply cash oldest-invoice-first</strong> — assuming payments cleared the newest invoice
+            would make the ageing look far healthier than it is.</span>
+            <span lang="vi">Phần lớn công việc không nằm ở cú pháp SQL, mà ở việc quyết định mỗi con số được đo dựa trên cái gì.
+            <strong>Giá vốn tính FIFO, không phải bình quân:</strong> mỗi đơn vị bán ra được truy về đúng lô nhập,
+            vì tính bình quân sẽ trải giá nhập tăng ngược lại vào những tháng chưa hề chịu mức giá đó,
+            và phần bào mòn ở trên sẽ tan một phần vào cái bình quân ấy.
+            <strong>Doanh thu trừ cả hai loại chiết khấu và không gồm VAT</strong> — VAT là thu hộ nhà nước, không phải doanh thu.
+            <strong>Công nợ cấn trừ theo hóa đơn cũ trước</strong> — nếu giả định tiền về trả cho hóa đơn mới nhất
+            thì bảng tuổi nợ sẽ đẹp hơn thực tế rất nhiều.</span>
+          </p>
+
+          <h4><span lang="en">A bug worth remembering</span><span lang="vi">Một lỗi đáng nhớ</span></h4>
+          <p>
+            <span lang="en">The reorder-point query originally computed average daily demand over
+            <em>days with a sale</em> instead of all days — inflating it about thirtyfold. There is now a test
+            that fails if that ever comes back.</span>
+            <span lang="vi">Truy vấn điểm đặt hàng ban đầu tính nhu cầu bình quân ngày chỉ trên
+            <em>những ngày có bán</em> thay vì mọi ngày — phóng đại khoảng 30 lần. Giờ đã có test
+            báo đỏ nếu lỗi đó quay lại.</span>
+          </p>
+
+          <div class="note">
+            <p>
+              <b><span lang="en">Stated up front:</span><span lang="vi">Nói rõ từ đầu:</span></b>
+              <span lang="en"> the data is simulated, and the README lists every pattern the generator plants on
+              purpose — so nothing here is a surprise I arranged and then "discovered". What is worth reviewing is
+              the SQL, the accounting choices, and the tests.</span>
+              <span lang="vi"> dữ liệu là mô phỏng, và README liệt kê mọi quy luật mà bộ sinh dữ liệu cố tình cài vào —
+              nên không có "phát hiện" nào là do tôi tự dàn dựng rồi tự tìm ra. Cái đáng xem là phần SQL,
+              các lựa chọn kế toán và bộ test.</span>
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- ---------- 2. vn-product-matcher ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">Information retrieval · NLP</p>
+          <h3>vn-product-matcher</h3>
+          <p class="lede">
+            <span lang="en">A shop assistant types <code class="mono">oc lgn 10x50 i304</code>. The catalogue calls the
+            same part <em>Bu lông lục giác ngoài 10x50x17 inox 304</em>. Matching free-text Vietnamese hardware names
+            onto 1,827 real catalogue SKUs — measured against five baselines.</span>
+            <span lang="vi">Nhân viên gõ <code class="mono">oc lgn 10x50 i304</code>. Danh mục gọi cùng món đó là
+            <em>Bu lông lục giác ngoài 10x50x17 inox 304</em>. Đối sánh tên hàng tiếng Việt viết tự do về
+            1.827 mã SKU thật — đo lại với năm mốc so sánh.</span>
+          </p>
+          <div class="tags">
+            <span class="tag">PyTorch</span><span class="tag">sentence-transformers</span><span class="tag">SQLite FTS5</span>
+            <span class="tag">FastAPI</span><span class="tag">McNemar test</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/vn-product-matcher" target="_blank" rel="noopener">Repository ↗</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>96.9%</b><span lang="en">R@1 on 274 unseen SKUs</span><span lang="vi">R@1 trên 274 SKU chưa từng thấy</span></div>
+        <div><b>+1.9 pt</b><span lang="en">over TF-IDF (McNemar p = 1.2e−3)</span><span lang="vi">so với TF-IDF (McNemar p = 1,2e−3)</span></div>
+        <div><b>p = 1.00</b><span lang="en">my reranker changed nothing</span><span lang="vi">lớp rerank của tôi vô tác dụng</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span><span lang="vi">Đọc chi tiết</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">Why the problem is hard</span><span lang="vi">Vì sao bài toán này khó</span></h4>
+          <p>
+            <span lang="en">No character the two strings share is enough. <code class="mono">ốc</code> and
+            <code class="mono">bu lông</code> are different words for the same bolt, <code class="mono">lgn</code> is
+            an abbreviation, <code class="mono">i304</code> is a steel grade, and the wrench size <code class="mono">17</code>
+            was never typed at all.</span>
+            <span lang="vi">Không có ký tự chung nào giữa hai chuỗi là đủ. <code class="mono">ốc</code> và
+            <code class="mono">bu lông</code> là hai cách gọi cùng một con bu lông, <code class="mono">lgn</code> là
+            viết tắt, <code class="mono">i304</code> là mác thép, còn cỡ chìa <code class="mono">17</code>
+            thì người dùng chưa từng gõ ra.</span>
+          </p>
+
+          <h4><span lang="en">Everything, measured against everything</span><span lang="vi">Đo tất cả, so với tất cả</span></h4>
+          <p>
+            <span lang="en">Recall@1 on <code class="mono">test_unseen</code> — queries for 274 SKUs removed from
+            training entirely, so this measures whether the model learned how Vietnamese hardware is
+            <em>named</em>, not whether it memorised the catalogue.</span>
+            <span lang="vi">Recall@1 trên <code class="mono">test_unseen</code> — truy vấn cho 274 SKU đã bị loại
+            hoàn toàn khỏi tập huấn luyện, nên phép đo này cho biết mô hình có học được <em>cách đặt tên</em>
+            hàng kim khí Việt Nam hay chỉ học thuộc danh mục.</span>
+          </p>
+
+          <div class="svgfig">
+            <svg viewBox="0 0 700 216" role="img" aria-label="Recall@1 by retriever on unseen SKUs">
+              <g font-family="ui-monospace, monospace" font-size="12">
+                <!-- row 1 -->
+                <text x="0" y="24" fill="var(--text-dim)">exact match</text>
+                <rect x="170" y="10" width="39" height="20" rx="3" fill="var(--text-mute)" opacity=".45"/>
+                <text x="217" y="24" fill="var(--text-mute)">8.3%</text>
+                <!-- row 2 -->
+                <text x="0" y="58" fill="var(--text-dim)">encoder, stock</text>
+                <rect x="170" y="44" width="300" height="20" rx="3" fill="var(--text-mute)" opacity=".45"/>
+                <text x="478" y="58" fill="var(--text-mute)">63.8%</text>
+                <!-- row 3 -->
+                <text x="0" y="92" fill="var(--text-dim)">BM25 (FTS5)</text>
+                <rect x="170" y="78" width="392" height="20" rx="3" fill="var(--text-mute)" opacity=".45"/>
+                <text x="570" y="92" fill="var(--text-mute)">83.4%</text>
+                <!-- row 4 -->
+                <text x="0" y="126" fill="var(--text-dim)">RapidFuzz</text>
+                <rect x="170" y="112" width="414" height="20" rx="3" fill="var(--text-mute)" opacity=".45"/>
+                <text x="592" y="126" fill="var(--text-mute)">88.2%</text>
+                <!-- row 5 : baseline -->
+                <text x="0" y="160" fill="var(--text)">TF-IDF char 3–5</text>
+                <rect x="170" y="146" width="447" height="20" rx="3" fill="var(--warn)" opacity=".8"/>
+                <text x="625" y="160" fill="var(--text)">95.0%</text>
+                <!-- row 6 : winner -->
+                <text x="0" y="194" fill="var(--text)" font-weight="700">encoder, tuned</text>
+                <rect x="170" y="180" width="455" height="20" rx="3" fill="var(--accent)"/>
+                <text x="633" y="194" fill="var(--text)" font-weight="700">96.9%</text>
+              </g>
+            </svg>
+          </div>
+          <p class="figcap">
+            <span lang="en">The orange bar is the baseline that nearly made the whole model unnecessary.</span>
+            <span lang="vi">Thanh màu cam là mốc so sánh suýt nữa khiến cả mô hình trở nên thừa.</span>
+          </p>
+
+          <h4><span lang="en">Three findings worth stating plainly</span><span lang="vi">Ba kết luận nói thẳng</span></h4>
+          <p>
+            <span lang="en"><strong>1. Fine-tuning is what matters, not the choice of encoder.</strong>
+            Off the shelf, the multilingual MiniLM scores 63.8% — far <em>worse</em> than a TF-IDF baseline that takes
+            six lines of scikit-learn. The same weights after fine-tuning score 96.9%. Reaching for an embedding model
+            without adapting it to the domain would have made this system worse, not better.</span>
+            <span lang="vi"><strong>1. Fine-tune mới là điều quyết định, không phải chọn encoder nào.</strong>
+            Dùng nguyên bản, MiniLM đa ngữ chỉ đạt 63,8% — <em>kém xa</em> mốc TF-IDF viết bằng sáu dòng scikit-learn.
+            Cũng bộ trọng số đó sau khi fine-tune đạt 96,9%. Nếu vớ lấy một mô hình embedding mà không thích nghi với
+            miền dữ liệu thì hệ thống còn tệ đi, chứ không tốt lên.</span>
+          </p>
+          <p>
+            <span lang="en"><strong>2. The win over a good lexical baseline is real but modest.</strong>
+            1.9 points, McNemar p = 1.22e−3, 95% CI [+0.80%, +2.94%]. Significant — and not the order of magnitude that
+            "we added deep learning" usually implies. Where the encoder earns its keep is the synonym queries it was
+            built for: 93.6% → 97.4%.</span>
+            <span lang="vi"><strong>2. Phần thắng so với mốc từ vựng tốt là có thật nhưng khiêm tốn.</strong>
+            1,9 điểm, McNemar p = 1,22e−3, khoảng tin cậy 95% [+0,80%, +2,94%]. Có ý nghĩa thống kê — và không phải
+            mức độ mà cụm "chúng tôi đã dùng deep learning" thường ám chỉ. Chỗ encoder thực sự đáng giá là nhóm truy vấn
+            đồng nghĩa mà nó được xây để xử lý: 93,6% → 97,4%.</span>
+          </p>
+
+          <div class="note">
+            <p>
+              <b><span lang="en">3. My hybrid reranker was a wasted idea.</span><span lang="vi">3. Lớp rerank hybrid của tôi là ý tưởng công cốc.</span></b>
+              <span lang="en"> I assumed encoders garble numbers, so I added a reranker scoring exact dimension and
+              material overlap. It changed nothing: 96.9% → 96.8%, p = 1.00, and it cost 5× the latency. It stays in
+              the repository as a documented negative result, because a design assumption that turns out false is worth
+              more written down than quietly deleted.</span>
+              <span lang="vi"> Tôi cho rằng encoder xử lý số kém, nên thêm một lớp rerank chấm điểm theo trùng khớp
+              kích thước và vật liệu. Nó không thay đổi gì: 96,9% → 96,8%, p = 1,00, và tốn gấp 5 lần độ trễ. Nó vẫn nằm
+              trong repo như một kết quả âm có ghi chép, vì một giả định thiết kế hóa ra sai thì viết ra còn đáng giá hơn
+              là lặng lẽ xóa đi.</span>
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- ---------- 3. ev-purchase-analysis ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">Statistics · Modelling</p>
+          <h3>ev-purchase-analysis</h3>
+          <p class="lede">
+            <span lang="en">What actually decides an EV purchase? A bilingual analysis of 668,665 records
+            from a live Kaggle competition — and an interaction effect that looked obvious in a cross-tab
+            and did not survive a formal test.</span>
+            <span lang="vi">Điều gì thực sự quyết định việc mua xe điện? Phân tích song ngữ 668.665 bản ghi
+            từ một cuộc thi Kaggle đang diễn ra — và một hiệu ứng tương tác trông hiển nhiên trên bảng chéo
+            nhưng không trụ được qua kiểm định.</span>
+          </p>
+          <div class="tags">
+            <span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">statsmodels</span>
+            <span class="tag">Jupyter</span><span class="tag">EN + VI</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/ev-purchase-analysis" target="_blank" rel="noopener">Repository ↗</a>
+          <a href="https://www.kaggle.com/code/minhngle/what-actually-decides-an-ev-purchase" target="_blank" rel="noopener">Kaggle notebook ↗</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>0.938 AUC</b><span lang="en">logistic, chosen over a 0.941 GBM</span><span lang="vi">hồi quy logistic, chọn thay cho GBM 0,941</span></div>
+        <div><b>92%</b><span lang="en">of buyers reached in the top 30% of the list</span><span lang="vi">người mua nằm trong 30% danh sách đầu</span></div>
+        <div><b>p = 0.62</b><span lang="en">the "obvious" interaction was not real</span><span lang="vi">tương tác "hiển nhiên" hóa ra không có</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span><span lang="vi">Đọc chi tiết</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">The mistake I made and then caught</span><span lang="vi">Sai lầm tôi mắc rồi tự bắt được</span></h4>
+          <p>
+            <span lang="en">A cross-tab showed buyers at <strong>69.3%</strong> where a subsidy was available and
+            environmental concern was high, against <strong>2.5%</strong> where neither held. That reads as a textbook
+            interaction: subsidies work far better on people who already care. A likelihood ratio test said
+            <strong>p = 0.62</strong> — no interaction. A main-effects-only model reproduces every cell to within
+            0.12 percentage points.</span>
+            <span lang="vi">Bảng chéo cho thấy tỉ lệ mua <strong>69,3%</strong> ở nhóm vừa có trợ cấp vừa quan tâm môi trường,
+            so với <strong>2,5%</strong> ở nhóm không có gì. Đọc lên thì đúng như một tương tác mẫu mực: trợ cấp phát huy
+            mạnh hơn nhiều với người vốn đã quan tâm. Kiểm định tỉ số hợp lý cho <strong>p = 0,62</strong> — không có
+            tương tác. Mô hình chỉ gồm hiệu ứng chính tái tạo mọi ô sai lệch dưới 0,12 điểm phần trăm.</span>
+          </p>
+          <p>
+            <span lang="en">The gap is an artefact of the probability scale: when one group starts near zero, any
+            multiplicative effect looks enormous in percentage points. <strong>It changed the recommendation.</strong>
+            Targeting the intersection buys nothing over targeting each driver on its own.</span>
+            <span lang="vi">Khoảng cách đó là ảo giác của thang xác suất: khi một nhóm xuất phát gần 0, mọi hiệu ứng
+            nhân đều trông khổng lồ nếu tính theo điểm phần trăm. <strong>Điều này đã thay đổi khuyến nghị.</strong>
+            Nhắm vào phần giao nhau không mang lại gì so với nhắm vào từng yếu tố riêng lẻ.</span>
+          </p>
+
+          <div class="figure">
+            <img src="assets/img/interaction.png" alt="Purchase rate by subsidy availability and environmental concern" loading="lazy" decoding="async">
+          </div>
+          <p class="figcap">
+            <span lang="en">The chart that fooled me: a 69.3% corner next to a 2.5% one. The likelihood ratio test
+            says both main effects alone already explain every cell.</span>
+            <span lang="vi">Biểu đồ đã đánh lừa tôi: một góc 69,3% nằm cạnh một góc 2,5%. Kiểm định tỉ số hợp lý
+            cho thấy chỉ riêng hai hiệu ứng chính đã giải thích được mọi ô.</span>
+          </p>
+
+          <div class="figrow">
+            <div>
+              <div class="figure"><img src="assets/img/lift_curve.png" alt="Lift curve: share of buyers reached against share of list contacted" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">Contacting the top 30% by score reaches 92% of buyers — the operational output.</span><span lang="vi">Liên hệ 30% danh sách điểm cao nhất chạm tới 92% người mua — đây là đầu ra dùng được.</span></p>
+            </div>
+            <div>
+              <div class="figure"><img src="assets/img/driver_ranking.png" alt="Ranked drivers of EV purchase" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">Ranked drivers from the logistic model — coefficients a marketing team can read.</span><span lang="vi">Xếp hạng yếu tố tác động từ mô hình logistic — hệ số mà đội marketing đọc được.</span></p>
+            </div>
+          </div>
+
+          <h4><span lang="en">Why the weaker model won</span><span lang="vi">Vì sao mô hình yếu hơn lại được chọn</span></h4>
+          <p>
+            <span lang="en">Gradient boosting reached 0.941 AUC against logistic regression's 0.938. I shipped the
+            logistic model. Three thousandths of AUC do not pay for losing the ability to tell a marketing team which
+            lever to pull and by how much.</span>
+            <span lang="vi">Gradient boosting đạt AUC 0,941 so với 0,938 của hồi quy logistic. Tôi chọn mô hình logistic.
+            Ba phần nghìn AUC không đủ để đánh đổi khả năng nói cho đội marketing biết nên kéo cần nào và kéo bao nhiêu.</span>
+          </p>
+
+          <div class="note">
+            <p>
+              <b><span lang="en">The leaderboard result, in full:</span><span lang="vi">Kết quả bảng xếp hạng, nói đủ:</span></b>
+              <span lang="en"> public ROC-AUC 0.94087 — <strong>rank 398 of 471, below the median of 0.94184</strong>.
+              A GBM on 13 raw features, no feature engineering, no tuning. My cross-validation predicted 0.94133, so the
+              validation was honest; the model was simply plain. Worth knowing: the leaderboard spans 0.005 AUC end to
+              end, so rank there says less than it looks like it does. Both READMEs state this.</span>
+              <span lang="vi"> ROC-AUC public 0,94087 — <strong>hạng 398/471, dưới trung vị 0,94184</strong>.
+              Một mô hình GBM trên 13 đặc trưng thô, không tạo đặc trưng, không tinh chỉnh. Cross-validation của tôi dự báo
+              0,94133 nên khâu kiểm định là trung thực; mô hình chỉ đơn giản là mô hình thường. Cần biết thêm: cả bảng xếp
+              hạng chỉ trải trong 0,005 AUC, nên thứ hạng ở đó nói ít hơn vẻ ngoài của nó. Cả hai README đều ghi rõ.</span>
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- ---------- 4. caption-decoding-study ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">Deep learning · Controlled study</p>
+          <h3>caption-decoding-study</h3>
+          <p class="lede">
+            <span lang="en">"Use a beam of 10" is common advice for image captioning. This is a controlled
+            comparison on MS-COCO that measures what a wider beam actually buys — and what it costs.</span>
+            <span lang="vi">"Cứ dùng beam 10" là lời khuyên phổ biến cho bài toán chú thích ảnh. Đây là một so sánh
+            có kiểm soát trên MS-COCO, đo xem beam rộng hơn thực sự đem lại gì — và đánh đổi cái gì.</span>
+          </p>
+          <div class="tags">
+            <span class="tag">PyTorch</span><span class="tag">ResNet-50</span><span class="tag">LSTM</span>
+            <span class="tag">MS-COCO</span><span class="tag">paired bootstrap</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/caption-decoding-study" target="_blank" rel="noopener">Repository ↗</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>beam 5</b><span lang="en">where BLEU-4 peaks (0.2785)</span><span lang="vi">nơi BLEU-4 đạt đỉnh (0,2785)</span></div>
+        <div><b>−0.0064</b><span lang="en">BLEU-4 going from beam 5 to 10, p = 0.017</span><span lang="vi">BLEU-4 khi đi từ beam 5 lên 10, p = 0,017</span></div>
+        <div><b>73% → 50%</b><span lang="en">unique captions as the beam widens</span><span lang="vi">tỉ lệ chú thích duy nhất khi beam rộng ra</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span><span lang="vi">Đọc chi tiết</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">The short answer</span><span lang="vi">Câu trả lời ngắn</span></h4>
+          <p>
+            <span lang="en">Quality peaks at a beam of 5 and then goes down, while caption variety falls the whole way.
+            <strong>A beam of 10 is worse than a beam of 5 on every axis measured, and takes twice as long.</strong></span>
+            <span lang="vi">Chất lượng đạt đỉnh ở beam 5 rồi đi xuống, trong khi độ đa dạng của chú thích giảm suốt chặng.
+            <strong>Beam 10 kém hơn beam 5 ở mọi chỉ số đã đo, và chạy lâu gấp đôi.</strong></span>
+          </p>
+
+          <div class="tbl-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th><span lang="en">Strategy</span><span lang="vi">Chiến lược</span></th>
+                  <th class="num">BLEU-1</th><th class="num">BLEU-4</th>
+                  <th class="num"><span lang="en">Unique</span><span lang="vi">Duy nhất</span></th>
+                  <th class="num"><span lang="en">Vocab</span><span lang="vi">Từ vựng</span></th>
+                  <th class="num">ms/img</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>greedy</td><td class="num">0.678</td><td class="num">0.2433</td><td class="num">73.3%</td><td class="num">464</td><td class="num">0.2</td></tr>
+                <tr><td>beam-3</td><td class="num">0.685</td><td class="num">0.2723</td><td class="num">62.2%</td><td class="num">431</td><td class="num">19.2</td></tr>
+                <tr class="hi"><td>beam-5</td><td class="num">0.680</td><td class="num">0.2785</td><td class="num">55.4%</td><td class="num">422</td><td class="num">31.9</td></tr>
+                <tr><td>beam-10</td><td class="num">0.671</td><td class="num">0.2705</td><td class="num">49.8%</td><td class="num">407</td><td class="num">65.9</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="figure">
+            <img src="assets/img/tradeoff.png" alt="Caption quality against diversity across decoding strategies" loading="lazy" decoding="async">
+          </div>
+          <p class="figcap">
+            <span lang="en">Quality against diversity. Beam-10 is dominated — there is no axis on which it wins.</span>
+            <span lang="vi">Chất lượng đối chiếu độ đa dạng. Beam-10 bị lấn át hoàn toàn — không có trục nào nó thắng.</span>
+          </p>
+
+          <h4><span lang="en">Why one number is never enough</span><span lang="vi">Vì sao một con số không bao giờ là đủ</span></h4>
+          <p>
+            <span lang="en">BLEU-4 peaks at beam 5. BLEU-1 peaks at beam 3. Diversity peaks at greedy.
+            <strong>Report a single metric at a single beam width and you can prove whatever you set out to prove.</strong>
+            The averages hide more too: beam-5 improves mean BLEU-4 by 0.028 over greedy but wins on only 42.9% of
+            individual images, because 21.1% of its captions are byte-identical to greedy's.</span>
+            <span lang="vi">BLEU-4 đạt đỉnh ở beam 5. BLEU-1 đạt đỉnh ở beam 3. Độ đa dạng đạt đỉnh ở greedy.
+            <strong>Chỉ báo cáo một chỉ số ở một mức beam thì muốn chứng minh điều gì cũng được.</strong>
+            Con số trung bình còn giấu nhiều thứ khác: beam-5 tăng BLEU-4 trung bình 0,028 so với greedy nhưng chỉ thắng
+            ở 42,9% số ảnh, vì 21,1% chú thích của nó giống hệt greedy tới từng byte.</span>
+          </p>
+
+          <div class="figrow">
+            <div>
+              <div class="figure"><img src="assets/img/bleu.png" alt="BLEU scores across beam widths" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">BLEU-4 rises then falls; the interval for beam-10 vs beam-5 excludes zero.</span><span lang="vi">BLEU-4 tăng rồi giảm; khoảng tin cậy beam-10 so beam-5 không chứa 0.</span></p>
+            </div>
+            <div>
+              <div class="figure"><img src="assets/img/diversity.png" alt="Caption diversity across beam widths" loading="lazy" decoding="async"></div>
+              <p class="figcap"><span lang="en">Diversity declines monotonically — the cost nobody quotes with a beam width.</span><span lang="vi">Độ đa dạng giảm đơn điệu — cái giá không ai nhắc tới khi khoe mức beam.</span></p>
+            </div>
+          </div>
+
+          <h4><span lang="en">An engineering result I did not expect</span><span lang="vi">Một kết quả kỹ thuật ngoài dự đoán</span></h4>
+          <p>
+            <span lang="en">Beam search ran <strong>5× faster on CPU than on Apple MPS</strong> (30.7 ms vs 160.8 ms per
+            image), because every step reads scores back from the GPU and each read costs a synchronisation. The first
+            MPS run did not finish in two hours; the CPU run took four minutes. The default is now
+            <code class="mono">--decode-device cpu</code>.</span>
+            <span lang="vi">Beam search chạy <strong>nhanh gấp 5 lần trên CPU so với Apple MPS</strong> (30,7 ms so với
+            160,8 ms mỗi ảnh), vì mỗi bước phải đọc điểm số về từ GPU và mỗi lần đọc tốn một lần đồng bộ. Lần chạy MPS đầu
+            tiên hai tiếng không xong; bản CPU chỉ mất bốn phút. Mặc định giờ là
+            <code class="mono">--decode-device cpu</code>.</span>
+          </p>
+        </div>
+      </details>
+    </article>
+
+    <!-- ---------- more work ---------- -->
+    <div class="sec-head reveal" style="margin-top:56px">
+      <p class="eyebrow"><span lang="en">Also on GitHub</span><span lang="vi">Ngoài ra trên GitHub</span></p>
+    </div>
+    <div class="approach">
+      <div class="appr reveal">
+        <span class="num">↗</span>
+        <h3><a href="https://github.com/conchocon154/object-detection" target="_blank" rel="noopener">object-detection</a></h3>
+        <p>
+          <span lang="en">Real-time detection from webcam, video or image — a modular YOLO + OpenCV pipeline with CI
+          and configurable thresholds.</span>
+          <span lang="vi">Nhận diện vật thể thời gian thực từ webcam, video hoặc ảnh — pipeline YOLO + OpenCV dạng module,
+          có CI và ngưỡng cấu hình được.</span>
+        </p>
+      </div>
+      <div class="appr reveal">
+        <span class="num">↗</span>
+        <h3><a href="https://github.com/conchocon154/Chess_Ai" target="_blank" rel="noopener">Chess_Ai</a></h3>
+        <p>
+          <span lang="en">Native macOS chess in Swift and SwiftUI — full international rules and three AI levels,
+          from random to minimax with heuristics.</span>
+          <span lang="vi">Cờ vua macOS gốc viết bằng Swift và SwiftUI — đủ luật quốc tế và ba mức máy,
+          từ đi ngẫu nhiên tới minimax kèm heuristic.</span>
+        </p>
+      </div>
+      <div class="appr reveal">
+        <span class="num">↗</span>
+        <h3><a href="https://github.com/conchocon154/MidDeep_Learning" target="_blank" rel="noopener">MidDeep_Learning</a></h3>
+        <p>
+          <span lang="en">The 2023 coursework CNN–LSTM captioner that the decoding study above builds on.
+          University project, cited as such.</span>
+          <span lang="vi">Mô hình chú thích ảnh CNN–LSTM làm trong môn học năm 2023, là nền cho nghiên cứu giải mã ở trên.
+          Bài tập đại học, và được ghi rõ như vậy.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SKILLS ====================== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span lang="en">Toolkit</span><span lang="vi">Công cụ</span></p>
+      <h2><span lang="en">What I actually use</span><span lang="vi">Những gì tôi thực sự dùng</span></h2>
+      <p>
+        <span lang="en">Listed only where there is public code to back it up.</span>
+        <span lang="vi">Chỉ liệt kê những thứ có mã nguồn công khai chứng minh được.</span>
+      </p>
+    </div>
+    <div class="skills">
+      <div class="skillcard reveal">
+        <h3><span lang="en">Data &amp; analysis</span><span lang="vi">Dữ liệu &amp; phân tích</span></h3>
+        <div class="chips">
+          <span class="chip">SQL</span><span class="chip">SQLite</span><span class="chip">MySQL</span>
+          <span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">statsmodels</span>
+          <span class="chip">matplotlib</span><span class="chip">Jupyter</span>
+          <span class="chip"><span lang="en">FIFO costing</span><span lang="vi">Giá vốn FIFO</span></span>
+          <span class="chip"><span lang="en">Cohort &amp; ageing</span><span lang="vi">Cohort &amp; tuổi nợ</span></span>
+        </div>
+      </div>
+      <div class="skillcard reveal">
+        <h3><span lang="en">Modelling</span><span lang="vi">Mô hình</span></h3>
+        <div class="chips">
+          <span class="chip">scikit-learn</span><span class="chip">PyTorch</span>
+          <span class="chip">sentence-transformers</span><span class="chip">OpenCV</span>
+          <span class="chip"><span lang="en">Logistic regression</span><span lang="vi">Hồi quy logistic</span></span>
+          <span class="chip"><span lang="en">Gradient boosting</span><span lang="vi">Gradient boosting</span></span>
+          <span class="chip">McNemar</span><span class="chip">Bootstrap</span>
+          <span class="chip"><span lang="en">LR test</span><span lang="vi">Kiểm định LR</span></span>
+        </div>
+      </div>
+      <div class="skillcard reveal">
+        <h3><span lang="en">Engineering</span><span lang="vi">Kỹ thuật</span></h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">pytest</span>
+          <span class="chip">Git</span><span class="chip">GitHub Actions</span>
+          <span class="chip">TypeScript</span><span class="chip">Swift</span><span class="chip">C#</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ABOUT ====================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <div class="sec-head reveal">
+          <p class="eyebrow"><span lang="en">Experience</span><span lang="vi">Kinh nghiệm</span></p>
+          <h2><span lang="en">Where I've worked</span><span lang="vi">Nơi tôi đã làm</span></h2>
+        </div>
+        <div class="tl reveal">
+          <div class="tl-item">
+            <div class="when">04/2023 – 09/2025</div>
+            <h3><span lang="en">Python Instructor</span><span lang="vi">Giảng viên Python</span></h3>
+            <div class="where"><a href="https://www.icantech.vn/" target="_blank" rel="noopener">ICANTECH</a></div>
+            <p>
+              <span lang="en">Taught Python online to classes of 5–10 secondary and high-school students.
+              Two and a half years of having to explain why a program does what it does — which is most of what
+              analysis work turns out to be.</span>
+              <span lang="vi">Dạy Python trực tuyến cho lớp 5–10 học sinh cấp 2 và cấp 3.
+              Hai năm rưỡi phải giải thích vì sao chương trình chạy ra kết quả đó — hóa ra đó cũng chính là
+              phần lớn công việc phân tích.</span>
+            </p>
+          </div>
+          <div class="tl-item">
+            <div class="when">07/2022 – 11/2022</div>
+            <h3>SEO</h3>
+            <div class="where"><a href="https://www.btse.com/en/home" target="_blank" rel="noopener">BTSE</a></div>
+          </div>
+          <div class="tl-item">
+            <div class="when">03/2021 – 06/2021</div>
+            <h3>Developer</h3>
+            <div class="where"><a href="https://havi.com.au/" target="_blank" rel="noopener">Havi Technology</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-head reveal">
+          <p class="eyebrow"><span lang="en">Education &amp; languages</span><span lang="vi">Học vấn &amp; ngôn ngữ</span></p>
+          <h2><span lang="en">Background</span><span lang="vi">Nền tảng</span></h2>
+        </div>
+        <div class="tl reveal">
+          <div class="tl-item">
+            <div class="when">08/2020 – 09/2025</div>
+            <h3><span lang="en">B.Sc. Computer Science</span><span lang="vi">Cử nhân Khoa học Máy tính</span></h3>
+            <div class="where"><span lang="en">Ton Duc Thang University, Vietnam</span><span lang="vi">Đại học Tôn Đức Thắng</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="when">07/2026</div>
+            <h3><span lang="en">International exchange programme</span><span lang="vi">Chương trình trao đổi quốc tế</span></h3>
+            <div class="where"><span lang="en">Chinese Culture University, Taipei</span><span lang="vi">Đại học Văn hóa Trung Hoa, Đài Bắc</span></div>
+            <p>
+              <span lang="en">One month, taught entirely in English.</span>
+              <span lang="vi">Một tháng, học hoàn toàn bằng tiếng Anh.</span>
+            </p>
+          </div>
+          <div class="tl-item">
+            <div class="when"><span lang="en">Languages</span><span lang="vi">Ngôn ngữ</span></div>
+            <h3><span lang="en">Vietnamese · English · Chinese</span><span lang="vi">Tiếng Việt · Tiếng Anh · Tiếng Trung</span></h3>
+            <p>
+              <span lang="en">Vietnamese native · English at PET B1 · Chinese conversational.
+              Two of my project write-ups are published in both English and Vietnamese.</span>
+              <span lang="vi">Tiếng Việt bản ngữ · Tiếng Anh trình độ PET B1 · Tiếng Trung giao tiếp cơ bản.
+              Hai bài viết dự án của tôi được xuất bản song song cả tiếng Anh và tiếng Việt.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CONTACT ====================== -->
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span lang="en">Get in touch</span><span lang="vi">Liên hệ</span></p>
+    <h2 class="reveal">
+      <span lang="en">Looking for a remote Data or Business Analyst role</span>
+      <span lang="vi">Đang tìm vị trí Data / Business Analyst làm remote</span>
+    </h2>
+    <p class="reveal">
+      <span lang="en">If you want the numbers behind a decision — and someone who will tell you when they don't
+      hold up — I'd be glad to talk.</span>
+      <span lang="vi">Nếu bạn cần con số đứng sau một quyết định — và một người sẵn sàng nói khi con số đó không
+      đứng vững — tôi rất sẵn lòng trao đổi.</span>
+    </p>
+    <div class="contact-row reveal">
+      <a class="btn btn-primary" href="mailto:dangleminh6677@gmail.com">dangleminh6677@gmail.com</a>
+      <a class="btn" href="https://github.com/conchocon154" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.kaggle.com/minhngle" target="_blank" rel="noopener">Kaggle</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Lê Minh Đăng</span>
+    <span class="mono">
+      <span lang="en">Hand-written HTML &amp; CSS. No framework, no tracker.</span>
+      <span lang="vi">HTML &amp; CSS viết tay. Không framework, không tracker.</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
