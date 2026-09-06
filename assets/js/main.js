@@ -15,9 +15,9 @@
   setTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
 
   function setTheme(t) {
+    // which icon shows is decided in CSS off data-theme; only the label changes here
     root.setAttribute('data-theme', t);
     if (themeBtn) {
-      themeBtn.textContent = t === 'dark' ? '☀' : '☾';
       themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
     }
   }
@@ -32,6 +32,7 @@
 
   /* ---------- language ---------- */
   var langBtn = document.getElementById('langBtn');
+  var langLabel = langBtn && langBtn.querySelector('.tg-label');
   var savedLang = store.get('lang');
   var browserVi = (navigator.language || '').toLowerCase().indexOf('vi') === 0;
   setLang(savedLang || (browserVi ? 'vi' : 'en'));
@@ -39,9 +40,11 @@
   function setLang(l) {
     root.setAttribute('data-lang', l);
     root.setAttribute('lang', l);
-    if (langBtn) {
+    if (langLabel) {
       // the button shows the language you would switch TO
-      langBtn.textContent = l === 'en' ? 'VI' : 'EN';
+      langLabel.textContent = l === 'en' ? 'VI' : 'EN';
+    }
+    if (langBtn) {
       langBtn.setAttribute('aria-label', l === 'en' ? 'Chuyển sang tiếng Việt' : 'Switch to English');
     }
   }

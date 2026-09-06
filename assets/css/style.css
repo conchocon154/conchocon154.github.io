@@ -80,6 +80,20 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
 
 .mono { font-family: var(--mono); }
 
+/* ---------- icons ----------
+   Every glyph is a <use> of the inline sprite and paints with currentColor,
+   so an icon is always the exact colour of the text it sits next to. */
+.ico {
+  width: 16px; height: 16px; flex: none;
+  color: inherit; vertical-align: -0.16em;
+}
+.ico-shift { transition: transform .18s ease; }
+@media (prefers-reduced-motion: reduce) { .ico-shift { transition: none; } }
+
+/* theme button shows the theme it switches TO */
+html[data-theme="dark"]  .ico-moon { display: none; }
+html[data-theme="light"] .ico-sun  { display: none; }
+
 /* ==========================================================================
    Top bar
    ========================================================================== */
@@ -109,12 +123,16 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
 
 .toggles { display: flex; gap: 6px; margin-left: 18px; }
 .tg {
+  display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--mono); font-size: 11px; font-weight: 600;
   background: var(--bg-raise); color: var(--text-dim);
   border: 1px solid var(--line); border-radius: 999px;
   padding: 5px 11px; cursor: pointer; line-height: 1;
   transition: color .15s, border-color .15s;
 }
+.tg .ico { width: 13px; height: 13px; vertical-align: 0; opacity: .85; }
+.tg:hover .ico { opacity: 1; }
+.tg-icon { padding: 5px 9px; }
 .tg:hover { color: var(--text); border-color: var(--accent); }
 
 @media (max-width: 760px) { .navlinks { display: none; } .toggles { margin-left: auto; } }
@@ -168,6 +186,7 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
   transition: border-color .15s, transform .15s;
 }
 .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.btn:hover .ico-shift { transform: translateX(3px); }
 .btn-primary { background: var(--accent); color: #05130f; border-color: var(--accent); }
 html[data-theme="light"] .btn-primary { color: #ffffff; }
 .btn-primary:hover { border-color: var(--accent); }
@@ -208,6 +227,7 @@ section { padding: 76px 0; border-top: 1px solid var(--line-soft); }
   font-family: var(--mono); font-size: 12px; color: var(--accent);
   display: block; margin-bottom: 12px;
 }
+.appr .num .ico { width: 15px; height: 15px; vertical-align: 0; }
 @media (max-width: 800px) { .approach { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
@@ -233,7 +253,12 @@ section { padding: 76px 0; border-top: 1px solid var(--line-soft); }
 }
 
 .proj-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
-.proj-links a { font-size: 13px; white-space: nowrap; }
+.proj-links a {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; white-space: nowrap;
+}
+.proj-links .ico { width: 14px; height: 14px; vertical-align: 0; opacity: .85; }
+.proj-links a:hover .ico { opacity: 1; }
 @media (max-width: 720px) {
   .proj-head { grid-template-columns: 1fr; }
   .proj-links { flex-direction: row; align-items: center; flex-wrap: wrap; }
