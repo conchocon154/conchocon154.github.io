@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The pages that ship are generated from src/index.html. If someone edits
+      # the master and forgets to rebuild, the site silently goes stale — this
+      # is the check that catches it.
+      - name: Pages match the bilingual master
+        run: python3 tools/build_site.py --check
+
+      - name: No stray language leaked into a page
+        run: |
+          set -e
+          if grep -q '<span lang="vi"' index.html; then
+            echo "Vietnamese text left in the English page"; exit 1
+          fi
+          if grep -q '<span lang="en"' vi/index.html; then
+            echo "English text left in the Vietnamese page"; exit 1
+          fi
+          echo "each page carries one language"
+
+      - name: Structured data is valid JSON
+        run: |
+          python3 - <<'PY'
+          import json, re, pathlib, sys
+          for f in ["index.html", "vi/index.html"]:
+              html = pathlib.Path(f).read_text(encoding="utf-8")
+              m = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+              if not m:
+                  sys.exit(f"{f}: no JSON-LD block")
+              json.loads(m.group(1))
+              print(f"{f}: JSON-LD valid")
+          PY
+
+      - name: Sitemap is well-formed and lists every page
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          root = ET.parse("sitemap.xml").getroot()
+          locs = {u.find("s:loc", ns).text for u in root.findall("s:url", ns)}
+          expected = {"https://conchocon154.github.io/",
+                      "https://conchocon154.github.io/vi/"}
+          assert locs == expected, f"sitemap lists {locs}"
+          print("sitemap lists both pages")
+          PY
+
+      # build_charts.py needs the four project repositories checked out beside
+      # this one, so it is not run here; the generated SVG is committed instead.

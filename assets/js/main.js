@@ -30,32 +30,9 @@
     });
   }
 
-  /* ---------- language ---------- */
-  var langBtn = document.getElementById('langBtn');
-  var langLabel = langBtn && langBtn.querySelector('.tg-label');
-  var savedLang = store.get('lang');
-  var browserVi = (navigator.language || '').toLowerCase().indexOf('vi') === 0;
-  setLang(savedLang || (browserVi ? 'vi' : 'en'));
-
-  function setLang(l) {
-    root.setAttribute('data-lang', l);
-    root.setAttribute('lang', l);
-    if (langLabel) {
-      // the button shows the language you would switch TO
-      langLabel.textContent = l === 'en' ? 'VI' : 'EN';
-    }
-    if (langBtn) {
-      langBtn.setAttribute('aria-label', l === 'en' ? 'Chuyển sang tiếng Việt' : 'Switch to English');
-    }
-  }
-
-  if (langBtn) {
-    langBtn.addEventListener('click', function () {
-      var next = root.getAttribute('data-lang') === 'en' ? 'vi' : 'en';
-      setLang(next);
-      store.set('lang', next);
-    });
-  }
+  /* Language is a URL now, not a runtime state: /  and  /vi/ are separate
+     documents so each can declare its own <html lang> and be indexed on its
+     own. The button in the bar is an ordinary link, so nothing to wire here. */
 
   /* ---------- scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');

@@ -1,0 +1,40 @@
+# Lê Minh Đăng
+
+> Data & Business Analyst based in Ho Chi Minh City, Vietnam, open to remote
+> roles. Computer Science graduate of Ton Duc Thang University (2025). Works in
+> SQL, Python and applied statistics on inventory, margin, receivables and
+> information-retrieval problems.
+
+Contact: dangleminh6677@gmail.com · https://conchocon154.github.io/
+
+## What distinguishes this work
+
+Every public project carries a baseline it had to beat and a significance test
+it had to survive, and the negative results are published rather than dropped:
+a hybrid reranker that changed nothing (p = 1.00), an interaction effect that a
+likelihood ratio test rejected (p = 0.62), and a Kaggle submission that placed
+398 of 471. The write-ups state these plainly.
+
+## Pages
+
+- [Portfolio (English)](https://conchocon154.github.io/): case studies with the figures, methods and caveats
+- [Portfolio (Tiếng Việt)](https://conchocon154.github.io/vi/): the same in Vietnamese
+
+## Projects
+
+- [retail-analytics-sql](https://github.com/conchocon154/retail-analytics-sql): eight analytical SQL queries over a simulated Vietnamese hardware shop — FIFO gross margin, ABC concentration, inventory turnover, receivables ageing, reorder points; 20 tests.
+- [vn-product-matcher](https://github.com/conchocon154/vn-product-matcher): matches free-text Vietnamese hardware names onto 1,827 catalogue SKUs; fine-tuned multilingual encoder reaches 96.9% Recall@1 on held-out SKUs, 1.9 points over a TF-IDF baseline (McNemar p = 1.2e-3).
+- [ev-purchase-analysis](https://github.com/conchocon154/ev-purchase-analysis): bilingual analysis of 668,665 records on electric-vehicle purchase decisions; logistic regression at 0.938 AUC chosen over a 0.941 gradient-boosted model for interpretability.
+- [caption-decoding-study](https://github.com/conchocon154/caption-decoding-study): controlled comparison of beam widths for CNN-LSTM image captioning on MS-COCO; BLEU-4 peaks at beam 5 and falls at beam 10 (p = 0.017) while caption diversity declines throughout.
+- [object-detection](https://github.com/conchocon154/object-detection): real-time detection pipeline with YOLO and OpenCV.
+
+## Skills
+
+SQL · SQLite · MySQL · Python · pandas · NumPy · statsmodels · scikit-learn ·
+PyTorch · FastAPI · pytest · Git · GitHub Actions · matplotlib · Jupyter ·
+logistic regression · gradient boosting · McNemar and bootstrap significance
+testing · FIFO costing · cohort and ageing analysis
+
+## Languages
+
+Vietnamese (native) · English (PET B1) · Chinese (conversational)

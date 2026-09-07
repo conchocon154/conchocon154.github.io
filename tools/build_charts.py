@@ -10,9 +10,12 @@ any zoom, it weighs a fraction of a bitmap, and — because the fills and stroke
 are CSS custom properties — one figure serves both the light and the dark
 theme instead of needing two exports.
 
+Charts are written into the bilingual master at src/index.html; run
+tools/build_site.py afterwards to emit the per-language pages that ship.
+
 Usage:
-    python3 tools/build_charts.py            # rewrite the marked blocks in index.html
-    python3 tools/build_charts.py --check    # fail if index.html is out of date
+    python3 tools/build_charts.py            # rewrite the marked blocks in the master
+    python3 tools/build_charts.py --check    # fail if the master is out of date
 """
 
 from __future__ import annotations
@@ -615,7 +618,7 @@ def render_into(html: str) -> str:
             re.DOTALL,
         )
         if not pattern.search(html):
-            raise SystemExit(f"no <!-- CHART:{name} --> block in index.html")
+            raise SystemExit(f"no <!-- CHART:{name} --> block in src/index.html")
         svg = fn(width)
         html = pattern.sub(lambda m: m.group(1) + "\n" + svg + "\n" + m.group(2), html, count=1)
     return html
@@ -631,13 +634,13 @@ def main() -> int:
         if not path.exists():
             raise SystemExit(f"missing source results for {name}: {path}")
 
-    target = ROOT / "index.html"
+    target = ROOT / "src" / "index.html"
     current = target.read_text(encoding="utf-8")
     updated = render_into(current)
 
     if args.check:
         if current != updated:
-            print("index.html is stale — run: python3 tools/build_charts.py")
+            print("src/index.html is stale — run: python3 tools/build_charts.py")
             return 1
         print("charts up to date")
         return 0
