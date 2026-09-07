@@ -266,6 +266,40 @@ section { padding: 76px 0; border-top: 1px solid var(--line-soft); }
 .sec-head h2 { font-size: clamp(26px, 4vw, 36px); margin-top: 8px; }
 .sec-head p { color: var(--text-dim); max-width: 62ch; margin: 12px 0 0; }
 
+/* ---------- profile card ---------- */
+#profile { padding-top: 62px; padding-bottom: 62px; }
+
+.profile-card {
+  border: 1px solid var(--line); border-radius: var(--r);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 42%),
+    var(--bg-raise);
+  padding: 26px 28px 22px; position: relative;
+}
+.profile-card::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
+  background: linear-gradient(90deg, transparent,
+    color-mix(in srgb, var(--accent) 55%, transparent), transparent);
+}
+.profile-lede {
+  margin: 12px 0 0; font-size: 16px; color: var(--text-dim); max-width: 78ch;
+}
+.profile-lede strong { color: var(--text); font-weight: 600; }
+
+.facts {
+  margin: 22px 0 0; display: grid; gap: 1px;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft); border-radius: 10px; overflow: hidden;
+}
+.facts > div { background: var(--bg-raise); padding: 12px 16px; }
+.facts dt {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text-mute);
+}
+.facts dd { margin: 4px 0 0; font-size: 14px; color: var(--text); line-height: 1.5; }
+@media (max-width: 720px) { .facts { grid-template-columns: 1fr; } }
+
 /* ---------- approach cards ---------- */
 .approach { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .appr {
