@@ -37,6 +37,11 @@ ROOT = Path(__file__).resolve().parent.parent
 MASTER = ROOT / "src" / "index.html"
 BASE = "https://conchocon154.github.io"
 
+# Paste the token from Search Console → Add property → HTML tag (the value of
+# the content attribute, not the whole tag) and rebuild. Empty means the meta
+# tag is simply not emitted.
+GOOGLE_SITE_VERIFICATION = ""
+
 # Everything the pages need to differ on, in one place.
 LANGS = {
     "en": {
@@ -227,7 +232,9 @@ def build(lang: str, master: str) -> str:
     s = s.replace('<meta property="og:url" content="https://conchocon154.github.io/">',
                   f'<meta property="og:url" content="{cfg["url"]}">')
 
-    head_extra = f"""<link rel="canonical" href="{cfg['url']}">
+    verify = (f'<meta name="google-site-verification" content="{GOOGLE_SITE_VERIFICATION}">\n'
+              if GOOGLE_SITE_VERIFICATION else "")
+    head_extra = f"""{verify}<link rel="canonical" href="{cfg['url']}">
 <link rel="alternate" hreflang="en" href="{LANGS['en']['url']}">
 <link rel="alternate" hreflang="vi" href="{LANGS['vi']['url']}">
 <link rel="alternate" hreflang="x-default" href="{LANGS['en']['url']}">
@@ -348,12 +355,45 @@ Vietnamese (native) · English (PET B1) · Chinese (conversational)
 
 # --------------------------------------------------------------------------
 
+def not_found() -> str:
+    """GitHub Pages serves this for any unknown path."""
+    return f"""<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Lê Minh Đăng</title>
+<meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .nf {{ min-height: 78vh; display: flex; flex-direction: column;
+        align-items: flex-start; justify-content: center; }}
+  .nf h1 {{ font-size: clamp(34px, 6vw, 58px); margin: 10px 0 0; }}
+  .nf p {{ color: var(--text-dim); margin: 14px 0 0; max-width: 46ch; }}
+</style>
+</head>
+<body>
+<div class="wrap nf">
+  <p class="eyebrow">404</p>
+  <h1>That page isn't here</h1>
+  <p>The link may be old, or the address slightly off. Everything lives on one page.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="/">Go to the portfolio</a>
+    <a class="btn" href="/vi/">Tiếng Việt</a>
+  </div>
+</div>
+</body>
+</html>
+"""
+
+
 def outputs() -> dict[str, str]:
     master = MASTER.read_text(encoding="utf-8")
     files = {cfg["path"]: build(lang, master) for lang, cfg in LANGS.items()}
     files["sitemap.xml"] = sitemap()
     files["robots.txt"] = robots()
     files["llms.txt"] = llms_txt()
+    files["404.html"] = not_found()
     return files
 
 

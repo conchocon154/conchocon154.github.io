@@ -447,6 +447,10 @@ footer {
 }
 footer .wrap { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
 
+.handles {
+  margin: 16px 0 0; font-size: 13px; color: var(--text-mute);
+}
+
 /* ==========================================================================
    Entrance animation
    ========================================================================== */
