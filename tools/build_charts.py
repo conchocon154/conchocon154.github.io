@@ -36,6 +36,7 @@ SRC = {
     "ev": HOME / "ev-purchase-analysis" / "reports",
     "cap": HOME / "caption-decoding-study" / "reports",
     "matcher": HOME / "vn-product-matcher" / "reports",
+    "store": HOME / "store-sales" / "reports" / "tables",
 }
 
 # Charts shown side by side get a narrower viewBox, so their labels render at
@@ -594,6 +595,147 @@ def matcher_recall(W: int) -> str:
 
 
 # --------------------------------------------------------------------------
+# 5. store-sales — the annual shape, the ladder, and the horizon
+# --------------------------------------------------------------------------
+
+SPIKE = "SCHOOL AND OFFICE SUPPLIES"
+STEADY = "GROCERY I"
+
+
+def store_season(W: int) -> str:
+    """Two families on one axis, each indexed to its own average day.
+
+    The whole argument for why one family of thirty-three carries an eighth of
+    the error: it is flat at a third of its average for most of the year and
+    seven times it in exactly the sixteen days being forecast.
+    """
+    rows = read_csv(SRC["store"] / "seasonal_index.csv")
+    doy = [num(r["doy"]) for r in rows]
+    spike = [num(r[SPIKE]) if r[SPIKE] else 0.0 for r in rows]
+    steady = [num(r[STEADY]) if r[STEADY] else 0.0 for r in rows]
+
+    pad_l, R, T, H = 44, 18, 30, 210
+    x0, x1, y0, y1 = pad_l, W - R, T, H - 34
+    top = max(spike) * 1.06
+
+    def px(d):
+        return x0 + (d - 1) / 365 * (x1 - x0)
+
+    def py(v):
+        return y1 - (v / top) * (y1 - y0)
+
+    s = [*open_svg(W, H, "Annual sales shape by family, indexed to each "
+                         "family's own average day")]
+    s.append(glow("f-ss"))
+    s.append(gridlines(x0, x1, [py(v) for v in (2, 4, 6)]))
+    for v in (2, 4, 6):
+        s.append(txt(x0 - 8, py(v) + 3.5, f"{v}\u00d7", anchor="end", size=9.5))
+    # The average day itself, which is what the index is measured against.
+    s.append(f'<line x1="{x0}" y1="{py(1):.1f}" x2="{x1}" y2="{py(1):.1f}" '
+             f'stroke="{LINE}" stroke-width="1.2"/>')
+    s.append(txt(x0 - 8, py(1) + 3.5, "1\u00d7", anchor="end", size=9.5, fill=DIM))
+
+    # The competition's sixteen days: 16-31 August.
+    s.append(f'<rect x="{px(228):.1f}" y="{y0}" width="{px(243) - px(228):.1f}" '
+             f'height="{y1 - y0:.1f}" fill="{WARN}" opacity="0.11"/>')
+    s.append(txt((px(228) + px(243)) / 2, y1 + 26, "the 16 days", anchor="middle",
+                 size=9.5, fill=WARN))
+
+    for vals, colour, wide in ((steady, ACCENT, 2.0), (spike, WARN, 2.4)):
+        d = " ".join(f"{'M' if i == 0 else 'L'}{px(x):.1f},{py(v):.1f}"
+                     for i, (x, v) in enumerate(zip(doy, vals)))
+        s.append(f'<path d="{d}" fill="none" stroke="{colour}" '
+                 f'stroke-width="{wide}" stroke-linejoin="round"'
+                 + (' filter="url(#f-ss)"' if colour == WARN else "") + "/>")
+
+    s.append(txt(px(30), py(6.4), "school & office supplies", size=10.5,
+                 fill=WARN, weight="700"))
+    s.append(txt(px(30), py(5.4), "grocery I", size=10.5, fill=ACCENT,
+                 weight="700"))
+    s.append(txt(x0, H - 4, "month of the year \u2192", size=9.5))
+    s.append("</svg>")
+    return "".join(s)
+
+
+def store_ladder(W: int) -> str:
+    rows = read_csv(SRC["store"] / "model_ladder.csv")
+    pairs = [(r["model"], num(r["mean"])) for r in rows if r["model"] != "zero"]
+    pairs.sort(key=lambda p: -p[1])
+
+    pad_l, R, row_h, T = 128, 54, 27, 26
+    H = T + row_h * len(pairs) + 22
+    x0, x1 = pad_l, W - R
+    top = max(v for _, v in pairs) * 1.04
+
+    s = [*open_svg(W, H, "RMSLE by model, mean of three sixteen-day folds")]
+    s.append(glow("f-ssl"))
+    s.append(txt(0, T - 12, "RMSLE \u2014 lower is better", size=10, fill=DIM))
+    best = min(v for _, v in pairs)
+    for i, (name, v) in enumerate(pairs):
+        y = T + i * row_h
+        w = v / top * (x1 - x0)
+        win = v == best
+        s.append(txt(x0 - 12, y + 15, name.replace("_", " "), anchor="end",
+                     size=10.5, fill=INK if win else MUTE,
+                     weight="700" if win else None))
+        s.append(f'<rect x="{x0}" y="{y + 4:.1f}" width="{w:.1f}" height="18" '
+                 f'rx="3" fill="{ACCENT if win else MUTE}" '
+                 f'opacity="{1 if win else 0.34}"'
+                 + (' filter="url(#f-ssl)"' if win else "") + "/>")
+        s.append(txt(x0 + w + 9, y + 17, f"{v:.4f}", size=10.5,
+                     fill=INK if win else MUTE, weight="700" if win else None))
+    s.append("</svg>")
+    return "".join(s)
+
+
+def store_horizon(W: int) -> str:
+    rows = read_csv(SRC["store"] / "error_by_horizon.csv")
+    hs = [num(r["horizon"]) for r in rows]
+    vs = [num(r["rmsle"]) for r in rows]
+
+    pad_l, R, T, H = 48, 20, 28, 200
+    x0, x1, y0, y1 = pad_l, W - R, T, H - 36
+    lo, hi = min(vs) * 0.985, max(vs) * 1.015
+
+    def px(h):
+        return x0 + (h - hs[0]) / (hs[-1] - hs[0]) * (x1 - x0)
+
+    def py(v):
+        return y1 - (v - lo) / (hi - lo) * (y1 - y0)
+
+    ticks = [round(lo + (hi - lo) * f, 3) for f in (0.15, 0.5, 0.85)]
+    s = [*open_svg(W, H, "Forecast error against days ahead")]
+    s.append(glow("f-ssh"))
+    s.append(gridlines(x0, x1, [py(t) for t in ticks]))
+    for t in ticks:
+        s.append(txt(x0 - 8, py(t) + 3.5, f"{t:.2f}", anchor="end", size=9.5))
+
+    # The fit, drawn rather than asserted: this is the claim the chart makes.
+    n = len(hs)
+    mx, my = sum(hs) / n, sum(vs) / n
+    slope = (sum((h - mx) * (v - my) for h, v in zip(hs, vs))
+             / sum((h - mx) ** 2 for h in hs))
+    fit = [my + slope * (h - mx) for h in hs]
+    s.append(f'<line x1="{px(hs[0]):.1f}" y1="{py(fit[0]):.1f}" '
+             f'x2="{px(hs[-1]):.1f}" y2="{py(fit[-1]):.1f}" stroke="{MUTE}" '
+             f'stroke-width="1.3" stroke-dasharray="4 4"/>')
+
+    d = " ".join(f"{'M' if i == 0 else 'L'}{px(h):.1f},{py(v):.1f}"
+                 for i, (h, v) in enumerate(zip(hs, vs)))
+    s.append(f'<path d="{d}" fill="none" stroke="{WARN}" stroke-width="2.2" '
+             f'stroke-linejoin="round" filter="url(#f-ssh)"/>')
+    for h, v in zip(hs, vs):
+        s.append(f'<circle cx="{px(h):.1f}" cy="{py(v):.1f}" r="2.6" '
+                 f'fill="{WARN}"/>')
+
+    s.append(txt(x0, H - 4, "days ahead \u2192", size=9.5))
+    s.append(txt(x1, H - 4, f"+{slope * 15:.3f} across the window",
+                 anchor="end", size=9.5, fill=WARN))
+    s.append("</svg>")
+    return "".join(s)
+
+
+# --------------------------------------------------------------------------
 # wiring
 # --------------------------------------------------------------------------
 
@@ -608,6 +750,9 @@ CHARTS = {
     "cap-beam":        (cap_beam,        HALF),
     "cap-diversity":   (cap_diversity,   HALF),
     "matcher-recall":  (matcher_recall,  WIDE),
+    "ss-season":       (store_season,    WIDE),
+    "ss-ladder":       (store_ladder,    HALF),
+    "ss-horizon":      (store_horizon,   HALF),
 }
 
 
