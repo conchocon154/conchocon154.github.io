@@ -37,6 +37,7 @@ SRC = {
     "cap": HOME / "caption-decoding-study" / "reports",
     "matcher": HOME / "vn-product-matcher" / "reports",
     "store": HOME / "store-sales" / "reports" / "tables",
+    "kag": HOME / "kaggriculture-agent" / "reports" / "tables",
 }
 
 # Charts shown side by side get a narrower viewBox, so their labels render at
@@ -736,6 +737,137 @@ def store_horizon(W: int) -> str:
 
 
 # --------------------------------------------------------------------------
+# 6. kaggriculture — the farm the agent builds, and the curves that shape it
+# --------------------------------------------------------------------------
+
+# One fill per thing that can occupy a tile. Melon is the loud one because the
+# first ten days of every game are entirely about melon.
+KAG_FILL = {
+    "MELON": "#e0632a", "WHEAT": "#d9a441", "CARROT": "#e08a3c",
+    "TOMATO": "#c8443c", "STRAWBERRY": "#d64f6d",
+    "COOP": "#3d8f7a", "PASTURE": "#2f7d92", "WEED": "#7a8a5c",
+}
+
+
+def kag_board(W: int) -> str:
+    """Three days of one real game, drawn tile by tile from the replay."""
+    rows = read_csv(SRC["kag"] / "farm_board.csv")
+    days = sorted({int(r["day"]) for r in rows})
+
+    gap, T, B = 22, 34, 30
+    side = (W - gap * (len(days) - 1)) / len(days)
+    cell = side / 10
+    H = T + side + B
+
+    s = [*open_svg(W, H, "The farm on three days of one game: all melon and an "
+                         "empty bank, then the crop sold and more land bought, "
+                         "then a farm across three quadrants")]
+    for i, day in enumerate(days):
+        ox = i * (side + gap)
+        tiles = [r for r in rows if int(r["day"]) == day]
+        money = tiles[0]["money"]
+        s.append(txt(ox, T - 18, f"day {day}", size=10.5, fill=INK, weight="700"))
+        s.append(txt(ox + side, T - 18, f"${int(money):,}", size=10.5,
+                     anchor="end", fill=ACCENT, weight="700"))
+
+        for r in tiles:
+            x, y = int(r["x"]), int(r["y"])
+            state, what = r["state"], r["what"]
+            if state == "locked":
+                fill, op = LINE, "0.45"
+            elif state == "empty":
+                fill, op = LINE, "0.16"
+            elif state == "weed":
+                fill, op = KAG_FILL["WEED"], "0.40"
+            elif state == "pen":
+                fill, op = KAG_FILL.get(what, MUTE), "0.28"
+            else:
+                fill, op = KAG_FILL.get(what, MUTE), "0.92"
+            s.append(f'<rect x="{ox + x * cell:.2f}" y="{T + y * cell:.2f}" '
+                     f'width="{cell - 0.7:.2f}" height="{cell - 0.7:.2f}" '
+                     f'rx="1" fill="{fill}" opacity="{op}"/>')
+
+        # The quadrant seam, and the shed every sale has to pass through.
+        s.append(f'<line x1="{ox + side / 2:.1f}" y1="{T}" '
+                 f'x2="{ox + side / 2:.1f}" y2="{T + side:.1f}" '
+                 f'stroke="{DIM}" stroke-width="1" opacity="0.45"/>')
+        s.append(f'<line x1="{ox}" y1="{T + side / 2:.1f}" '
+                 f'x2="{ox + side:.1f}" y2="{T + side / 2:.1f}" '
+                 f'stroke="{DIM}" stroke-width="1" opacity="0.45"/>')
+        s.append(f'<rect x="{ox + side / 2 - cell * 0.38:.2f}" '
+                 f'y="{T + side / 2 - cell * 0.38:.2f}" '
+                 f'width="{cell * 0.76:.2f}" height="{cell * 0.76:.2f}" '
+                 f'fill="{INK}"/>')
+        for pos in tiles[0]["units"].split("|"):
+            ux, uy = (int(v) for v in pos.split(":"))
+            s.append(f'<circle cx="{ox + (ux + 0.5) * cell:.2f}" '
+                     f'cy="{T + (uy + 0.5) * cell:.2f}" r="{cell * 0.20:.2f}" '
+                     f'fill="none" stroke="{INK}" stroke-width="1.3"/>')
+
+    keys = [("MELON", "melon", "0.92"), ("CARROT", "carrot", "0.92"),
+            ("PASTURE", "pen, stocked", "0.92"), ("PASTURE", "pen, empty", "0.28")]
+    x = 0
+    for key, label, op in keys:
+        s.append(f'<rect x="{x}" y="{H - 15}" width="10" height="10" rx="2" '
+                 f'fill="{KAG_FILL[key]}" opacity="{op}"/>')
+        s.append(txt(x + 15, H - 6, label, size=9.5))
+        x += 22 + len(label) * 6.2
+    s.append(f'<rect x="{x}" y="{H - 15}" width="10" height="10" fill="{INK}"/>')
+    s.append(txt(x + 15, H - 6, "shed", size=9.5))
+    s.append("</svg>")
+    return "".join(s)
+
+
+def kag_depth(W: int) -> str:
+    """Cumulative revenue against units sold — why melon has a ceiling."""
+    rows = read_csv(SRC["kag"] / "market_depth.csv")
+    items = [k for k in rows[0] if k != "units"]
+    xs = [num(r["units"]) for r in rows]
+    series = {k: [num(r[k]) for r in rows] for k in items}
+
+    pad_l, R, T, H = 54, 74, 30, 216
+    x0, x1, y0, y1 = pad_l, W - R, T, H - 32
+    top = max(max(v) for v in series.values()) * 1.05
+
+    def px(u):
+        return x0 + (u - xs[0]) / (xs[-1] - xs[0]) * (x1 - x0)
+
+    def py(v):
+        return y1 - v / top * (y1 - y0)
+
+    colour = {"melon": WARN, "fertilizer": "#2f7d92", "egg": "#3d8f7a",
+              "wheat": "#d9a441", "wool": MUTE}
+
+    s = [*open_svg(W, H, "Cumulative revenue against units sold: melon "
+                         "flattens after 150 units, egg and fertiliser do not")]
+    s.append(glow("f-kag"))
+    s.append(gridlines(x0, x1, [py(v) for v in (10000, 20000)]))
+    for v in (10000, 20000):
+        s.append(txt(x0 - 8, py(v) + 3.5, f"{v // 1000}k", anchor="end", size=9.5))
+
+    ends = sorted(((series[k][-1], k) for k in items), reverse=True)
+    gap, placed = top * 0.075, []
+    for value, key in ends:
+        d = " ".join(f"{'M' if i == 0 else 'L'}{px(u):.1f},{py(v):.1f}"
+                     for i, (u, v) in enumerate(zip(xs, series[key])))
+        loud = key in ("melon", "egg")
+        s.append(f'<path d="{d}" fill="none" stroke="{colour[key]}" '
+                 f'stroke-width="{2.3 if loud else 1.8}" '
+                 f'opacity="{1 if loud else 0.75}"'
+                 + (' filter="url(#f-kag)"' if key == "melon" else "") + "/>")
+        y = value
+        if placed and placed[-1] - y < gap:
+            y = placed[-1] - gap
+        placed.append(y)
+        s.append(txt(x1 + 8, py(y) + 3.5, key, size=10,
+                     fill=colour[key], weight="700" if loud else None))
+
+    s.append(txt(x0, H - 4, "units sold into the market \u2192", size=9.5))
+    s.append("</svg>")
+    return "".join(s)
+
+
+# --------------------------------------------------------------------------
 # wiring
 # --------------------------------------------------------------------------
 
@@ -753,6 +885,8 @@ CHARTS = {
     "ss-season":       (store_season,    WIDE),
     "ss-ladder":       (store_ladder,    HALF),
     "ss-horizon":      (store_horizon,   HALF),
+    "kag-board":       (kag_board,       WIDE),
+    "kag-depth":       (kag_depth,       WIDE),
 }
 
 
