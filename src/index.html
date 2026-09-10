@@ -779,6 +779,105 @@
       </details>
     </article>
 
+    <!-- ---------- 5. store-sales-forecasting ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">Forecasting · Competition</p>
+          <h3>store-sales-forecasting</h3>
+          <p class="lede">
+            <span lang="en">Sixteen days of daily sales for 1,782 store-family series in Ecuador, ranked against
+            641 other teams. It is here for a result I did not expect: two models that differed clearly in
+            backtest scored the same on the leaderboard, and I stopped adding features rather than tune against
+            a number that had stopped meaning anything.</span>
+            <span lang="vi">Dự báo doanh số 16 ngày cho 1.782 chuỗi cửa hàng–ngành hàng ở Ecuador, xếp hạng cùng
+            641 đội khác. Nó có mặt ở đây vì một kết quả tôi không ngờ: hai mô hình chênh nhau rõ rệt khi kiểm
+            định cục bộ lại cho điểm gần như y hệt trên bảng xếp hạng — và tôi dừng thêm feature thay vì tiếp
+            tục tinh chỉnh theo một con số đã mất ý nghĩa.</span>
+          </p>
+          <div class="tags">
+            <span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">time series</span>
+            <span class="tag">pytest</span><span class="tag">CI</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/store-sales-forecasting" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-code"/></svg>Repository</a>
+          <a href="https://www.kaggle.com/code/minhngle/store-sales-direct-multi-horizon-forecasting" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-notebook"/></svg>Kaggle notebook</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>0.40695</b><span lang="en">RMSLE, rank ~92 of 642 — the top is 0.37294</span><span lang="vi">RMSLE, hạng ~92/642 — đỉnh bảng là 0,37294</span></div>
+        <div><b>&minus;12%</b><span lang="en">against the weekday-mean baseline, measured on the same folds</span><span lang="vi">so với baseline trung bình theo thứ, đo trên cùng bộ fold</span></div>
+        <div><b>0.0002</b><span lang="en">what two models 0.021 apart in backtest differed by on the leaderboard</span><span lang="vi">khoảng cách trên bảng xếp hạng của hai mô hình chênh 0,021 khi kiểm định</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span><span lang="vi">Đọc chi tiết</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">Measuring it the way the competition asks</span><span lang="vi">Đo đúng cách cuộc thi hỏi</span></h4>
+          <p>
+            <span lang="en">The metric is RMSLE, which is RMSE on <code class="mono">log1p</code>, so everything here
+            is fitted in log space and converted back once at the end — on series running from 0 to 124,717 that is
+            not a rounding difference. Validation is three sixteen-day folds ending at the last day of training,
+            the same shape as the test window. A random split would ask a much easier question, predict a Tuesday
+            given the Wednesday after it, and would rank the models differently.</span>
+            <span lang="vi">Thước đo là RMSLE, tức RMSE trên <code class="mono">log1p</code>, nên mọi mô hình đều
+            khớp trong không gian log rồi mới đổi ngược lại một lần ở cuối — với chuỗi chạy từ 0 tới 124.717 thì đó
+            không phải khác biệt làm tròn. Kiểm định dùng ba fold 16 ngày kết thúc đúng ngày cuối của dữ liệu huấn
+            luyện, cùng hình dạng với kỳ test. Chia ngẫu nhiên sẽ hỏi một câu dễ hơn nhiều — đoán thứ Ba khi đã biết
+            thứ Tư ngay sau đó — và sẽ xếp hạng các mô hình khác đi.</span>
+          </p>
+
+          <h4><span lang="en">The ladder</span><span lang="vi">Bậc thang mô hình</span></h4>
+          <p>
+            <span lang="en">Direct multi-horizon gradient boosting at <strong>0.3975</strong> against
+            <strong>0.4505</strong> for the weekday mean, <strong>0.5519</strong> for a seasonal naive and
+            <strong>4.4197</strong> for predicting zero. Ninety-six of the 1,782 series had sold nothing in sixty
+            days and cover 1,536 of the 28,512 rows to predict; their forecast is zero by rule, not by model.</span>
+            <span lang="vi">Gradient boosting dự báo trực tiếp đa tầm đạt <strong>0,3975</strong> so với
+            <strong>0,4505</strong> của trung bình theo thứ, <strong>0,5519</strong> của seasonal naive và
+            <strong>4,4197</strong> nếu đoán toàn số 0. Có 96 trong 1.782 chuỗi không bán được gì suốt 60 ngày,
+            chiếm 1.536 trong 28.512 dòng cần dự báo; chúng được trả về 0 bằng luật, không phải bằng mô hình.</span>
+          </p>
+
+          <h4><span lang="en">Where the loss actually was</span><span lang="vi">Sai số thực sự nằm ở đâu</span></h4>
+          <p>
+            <span lang="en">RMSLE is a mean over 28,512 rows and it hides everything, so I split it. Five families
+            out of thirty-three carried <strong>40%</strong> of the squared error on 15% of the rows, worst of them
+            school supplies at 13.1% — Ecuadorean term starts in August and the family goes up several-fold. A
+            year-ago seasonal index built for exactly that moved the August fold from 0.42002 to 0.41305: real,
+            and small.</span>
+            <span lang="vi">RMSLE là trung bình trên 28.512 dòng và nó che hết mọi thứ, nên tôi tách ra. Năm ngành
+            hàng trên ba mươi ba gánh <strong>40%</strong> sai số bình phương chỉ với 15% số dòng, tệ nhất là đồ
+            dùng học tập với 13,1% — Ecuador khai giảng vào tháng 8 và ngành này vọt lên nhiều lần. Một chỉ số mùa
+            vụ lấy từ cùng kỳ năm trước, dựng đúng cho việc đó, kéo fold tháng 8 từ 0,42002 xuống 0,41305: thật,
+            và nhỏ.</span>
+          </p>
+
+          <h4><span lang="en">The part I could not close</span><span lang="vi">Phần tôi chưa khép lại được</span></h4>
+          <p>
+            <span lang="en">Two submissions — a plain gradient booster and a three-way blend with cross-sectional
+            features, explicit lags and recency-weighted origins — differ by <strong>0.021</strong> on the fold
+            immediately before the test window. On the leaderboard they scored <strong>0.40713</strong> and
+            <strong>0.40695</strong>. The local improvement was real and measured, and it was not reaching the
+            leaderboard, so I stopped: past that point more features would have been guessing dressed as work.
+            The error climbs across the horizon, from about 0.40 on a fold's first days to 0.46 on its last, so
+            the hypothesis to test first is that the public leaderboard scores the earlier part of the window —
+            exactly the stretch where every one of these models agrees.</span>
+            <span lang="vi">Hai bản nộp — một gradient booster trơn và một blend ba mô hình có feature liên chuỗi,
+            giá trị trễ tường minh và trọng số theo độ mới — chênh nhau <strong>0,021</strong> trên fold sát ngay
+            trước kỳ test. Trên bảng xếp hạng chúng được <strong>0,40713</strong> và <strong>0,40695</strong>.
+            Cải thiện cục bộ là thật và đã đo, nhưng nó không tới được bảng xếp hạng, nên tôi dừng: từ đó trở đi,
+            thêm feature chỉ là đoán mò khoác áo làm việc. Sai số tăng dần theo tầm dự báo, từ khoảng 0,40 ở những
+            ngày đầu một fold lên 0,46 ở ngày cuối, nên giả thuyết cần kiểm trước tiên là public leaderboard chấm
+            phần đầu kỳ test — đúng đoạn mà mọi mô hình ở đây đều giống nhau.</span>
+          </p>
+        </div>
+      </details>
+    </article>
+
     <!-- ---------- more work ---------- -->
     <div class="sec-head reveal" style="margin-top:56px">
       <p class="eyebrow"><span lang="en">Also on GitHub</span><span lang="vi">Ngoài ra trên GitHub</span></p>

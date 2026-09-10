@@ -799,6 +799,85 @@
       </details>
     </article>
 
+    <!-- ---------- 5. store-sales-forecasting ---------- -->
+    <article class="proj reveal">
+      <div class="proj-head">
+        <div>
+          <p class="kicker">Forecasting · Competition</p>
+          <h3>store-sales-forecasting</h3>
+          <p class="lede">
+            <span lang="en">Sixteen days of daily sales for 1,782 store-family series in Ecuador, ranked against
+            641 other teams. It is here for a result I did not expect: two models that differed clearly in
+            backtest scored the same on the leaderboard, and I stopped adding features rather than tune against
+            a number that had stopped meaning anything.</span>
+            
+          </p>
+          <div class="tags">
+            <span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">time series</span>
+            <span class="tag">pytest</span><span class="tag">CI</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/conchocon154/store-sales-forecasting" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-code"/></svg>Repository</a>
+          <a href="https://www.kaggle.com/code/minhngle/store-sales-direct-multi-horizon-forecasting" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-notebook"/></svg>Kaggle notebook</a>
+        </div>
+      </div>
+
+      <div class="result-band">
+        <div><b>0.40695</b><span lang="en">RMSLE, rank ~92 of 642 — the top is 0.37294</span></div>
+        <div><b>&minus;12%</b><span lang="en">against the weekday-mean baseline, measured on the same folds</span></div>
+        <div><b>0.0002</b><span lang="en">what two models 0.021 apart in backtest differed by on the leaderboard</span></div>
+      </div>
+
+      <details>
+        <summary><span class="chev">›</span><span lang="en">Read the case study</span></summary>
+        <div class="proj-body">
+
+          <h4><span lang="en">Measuring it the way the competition asks</span></h4>
+          <p>
+            <span lang="en">The metric is RMSLE, which is RMSE on <code class="mono">log1p</code>, so everything here
+            is fitted in log space and converted back once at the end — on series running from 0 to 124,717 that is
+            not a rounding difference. Validation is three sixteen-day folds ending at the last day of training,
+            the same shape as the test window. A random split would ask a much easier question, predict a Tuesday
+            given the Wednesday after it, and would rank the models differently.</span>
+            
+          </p>
+
+          <h4><span lang="en">The ladder</span></h4>
+          <p>
+            <span lang="en">Direct multi-horizon gradient boosting at <strong>0.3975</strong> against
+            <strong>0.4505</strong> for the weekday mean, <strong>0.5519</strong> for a seasonal naive and
+            <strong>4.4197</strong> for predicting zero. Ninety-six of the 1,782 series had sold nothing in sixty
+            days and cover 1,536 of the 28,512 rows to predict; their forecast is zero by rule, not by model.</span>
+            
+          </p>
+
+          <h4><span lang="en">Where the loss actually was</span></h4>
+          <p>
+            <span lang="en">RMSLE is a mean over 28,512 rows and it hides everything, so I split it. Five families
+            out of thirty-three carried <strong>40%</strong> of the squared error on 15% of the rows, worst of them
+            school supplies at 13.1% — Ecuadorean term starts in August and the family goes up several-fold. A
+            year-ago seasonal index built for exactly that moved the August fold from 0.42002 to 0.41305: real,
+            and small.</span>
+            
+          </p>
+
+          <h4><span lang="en">The part I could not close</span></h4>
+          <p>
+            <span lang="en">Two submissions — a plain gradient booster and a three-way blend with cross-sectional
+            features, explicit lags and recency-weighted origins — differ by <strong>0.021</strong> on the fold
+            immediately before the test window. On the leaderboard they scored <strong>0.40713</strong> and
+            <strong>0.40695</strong>. The local improvement was real and measured, and it was not reaching the
+            leaderboard, so I stopped: past that point more features would have been guessing dressed as work.
+            The error climbs across the horizon, from about 0.40 on a fold's first days to 0.46 on its last, so
+            the hypothesis to test first is that the public leaderboard scores the earlier part of the window —
+            exactly the stretch where every one of these models agrees.</span>
+            
+          </p>
+        </div>
+      </details>
+    </article>
+
     <!-- ---------- more work ---------- -->
     <div class="sec-head reveal" style="margin-top:56px">
       <p class="eyebrow"><span lang="en">Also on GitHub</span></p>
